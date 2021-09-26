@@ -76,7 +76,7 @@ func (ll *List) Remove(n *Node) {
 		ll.Head = ll.Head.next
 	}
 	if ll.Tail == n {
-		ll.Tail = ll.Tail.next
+		ll.Tail = ll.Tail.prev
 	}
 	if n.prev != nil {
 		n.prev.next = n.next
