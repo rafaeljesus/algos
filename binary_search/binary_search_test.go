@@ -19,5 +19,9 @@ func TestBinarySearch(t *testing.T) {
 		if !reflect.DeepEqual(res, tt.out) {
 			t.Errorf("expected: %v,  got: %v", tt.out, res)
 		}
+		res = BinarySearchRecursive(tt.in, tt.target, 0, len(tt.in)-1)
+		if !reflect.DeepEqual(res, tt.out) {
+			t.Errorf("expected: %v,  got: %v", tt.out, res)
+		}
 	}
 }

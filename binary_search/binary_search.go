@@ -17,6 +17,21 @@ func BinarySearch(arr []int, target int) int {
 	return -1
 }
 
+func BinarySearchRecursive(arr []int, target, left, right int) int {
+	for left <= right {
+		mid := (left + right) / 2
+		switch v := arr[mid]; {
+		case v == target:
+			return mid
+		case v < target:
+			return BinarySearchRecursive(arr, target, mid+1, right)
+		default:
+			return BinarySearchRecursive(arr, target, left, mid-1)
+		}
+	}
+	return -1
+}
+
 // arr = [1, 3, 5, 7, 8]
 // target = 5
 // left = 0

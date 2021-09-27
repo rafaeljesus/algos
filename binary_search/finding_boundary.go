@@ -1,5 +1,8 @@
 package binary_search
 
+// arr: [false, false, true, true, true]
+// expected: 3
+// O(log N)
 func FindingBoundary(arr []bool) int {
 	left := 0
 	right := len(arr) - 1
