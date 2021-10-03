@@ -1,4 +1,4 @@
-package depth_first_search
+package graph_traversal
 
 import (
 	"reflect"
@@ -9,10 +9,10 @@ func TestDFSTraverse(t *testing.T) {
 	alice := &Vertex{Value: "Alice"}
 	cynthia := &Vertex{Value: "Cynthia"}
 	bob := &Vertex{Value: "Bob"}
-	alice.AdjacentVertex = append(alice.AdjacentVertex, cynthia)
-	alice.AdjacentVertex = append(alice.AdjacentVertex, bob)
-	cynthia.AdjacentVertex = append(cynthia.AdjacentVertex, bob)
-	bob.AdjacentVertex = append(bob.AdjacentVertex, cynthia)
+	alice.AdjacentVertices = append(alice.AdjacentVertices, cynthia)
+	alice.AdjacentVertices = append(alice.AdjacentVertices, bob)
+	cynthia.AdjacentVertices = append(cynthia.AdjacentVertices, bob)
+	bob.AdjacentVertices = append(bob.AdjacentVertices, cynthia)
 
 	visited := make(visitedMap)
 
@@ -26,10 +26,10 @@ func TestDFSSearch(t *testing.T) {
 	alice := &Vertex{Value: "Alice"}
 	cynthia := &Vertex{Value: "Cynthia"}
 	bob := &Vertex{Value: "Bob"}
-	alice.AdjacentVertex = append(alice.AdjacentVertex, cynthia)
-	alice.AdjacentVertex = append(alice.AdjacentVertex, bob)
-	cynthia.AdjacentVertex = append(cynthia.AdjacentVertex, bob)
-	bob.AdjacentVertex = append(bob.AdjacentVertex, cynthia)
+	alice.AdjacentVertices = append(alice.AdjacentVertices, cynthia)
+	alice.AdjacentVertices = append(alice.AdjacentVertices, bob)
+	cynthia.AdjacentVertices = append(cynthia.AdjacentVertices, bob)
+	bob.AdjacentVertices = append(bob.AdjacentVertices, cynthia)
 
 	visited := make(visitedMap)
 

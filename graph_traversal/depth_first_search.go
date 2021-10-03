@@ -1,8 +1,8 @@
-package depth_first_search
+package graph_traversal
 
 type Vertex struct {
-	Value          string
-	AdjacentVertex []*Vertex
+	Value            string
+	AdjacentVertices []*Vertex
 }
 
 type visitedMap map[string]struct{}
@@ -10,7 +10,7 @@ type visitedMap map[string]struct{}
 func DFSTraverse(v *Vertex, visited visitedMap, arr []string) []string {
 	arr = append(arr, v.Value)
 	visited[v.Value] = struct{}{}
-	for _, vertex := range v.AdjacentVertex {
+	for _, vertex := range v.AdjacentVertices {
 		if _, ok := visited[vertex.Value]; ok {
 			continue
 		}
@@ -24,7 +24,7 @@ func DFSSearch(v *Vertex, search string, visited visitedMap) bool {
 		return true
 	}
 	visited[v.Value] = struct{}{}
-	for _, vertex := range v.AdjacentVertex {
+	for _, vertex := range v.AdjacentVertices {
 		if _, ok := visited[vertex.Value]; ok {
 			continue
 		}
