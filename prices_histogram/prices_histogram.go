@@ -23,37 +23,25 @@ Expected Output:
 
 func main() {
 	prices := []int{10, 11, 13, 22, 24, 38}
-	bucketsMap := map[int]string{
-		0:  "",
-		10: "",
-		20: "",
-		30: "",
-		40: "",
-		50: "",
-		60: "",
-		70: "",
-		80: "",
-		90: "",
-	}
+	bucketMap := map[int]string{0: "", 10: "", 20: "", 30: "", 40: "", 50: "", 60: "", 70: "", 80: "", 90: ""}
+	// O(n * m)
 	for _, price := range prices {
-		for bucket, s := range bucketsMap {
-			if price == bucket {
-				bucketsMap[bucket] = s + "*"
-			} else if price > bucket && price < bucket+10 {
-				bucketsMap[bucket] = s + "*"
+		for bucket, str := range bucketMap {
+			if price >= bucket && price < bucket+10 {
+				bucketMap[bucket] = fmt.Sprintf("%s*", str)
 			}
 		}
 	}
-	buckets := make([]int, 0)
-	for bucket, _ := range bucketsMap {
-		buckets = append(buckets, bucket)
+	bucketsRange := make([]int, 0)
+	for bucket, _ := range bucketMap {
+		bucketsRange = append(bucketsRange, bucket)
 	}
-	sort.Slice(buckets, func(i, j int) bool {
-		return buckets[i] < buckets[j]
+	sort.Slice(bucketsRange, func(i, j int) bool {
+		return bucketsRange[i] < bucketsRange[j]
 	})
-	for _, orderedBucket := range buckets {
-		if histo, ok := bucketsMap[orderedBucket]; ok {
-			fmt.Printf("%v: %s\n", orderedBucket, histo)
+	for _, orderedBucket := range bucketsRange {
+		if str, ok := bucketMap[orderedBucket]; ok {
+			fmt.Printf("%d: %s\n", orderedBucket, str)
 		}
 	}
 }
