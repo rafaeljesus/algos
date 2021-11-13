@@ -3,7 +3,7 @@ package graph_traversal
 func BFSTraverse(v *Vertex) []string {
 	visited := make(map[string]struct{})
 	visited[v.Value] = struct{}{}
-	arr := make([]string, 0)
+	arr := []string{}
 	arr = append(arr, v.Value)
 	queue := v.AdjacentVertices
 	for len(queue) > 0 {
