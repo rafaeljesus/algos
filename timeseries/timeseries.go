@@ -1,6 +1,10 @@
-package timeseries
+package main
 
-import "time"
+import (
+	"fmt"
+	"sort"
+	"time"
+)
 
 // p1 : 1.0, 08/10/2021
 type Point struct {
@@ -26,6 +30,27 @@ type Metric struct {
 	Points []*Point
 }
 
+func (m *Metric) Sum() float64 {
+	var sum float64
+	for _, p := range m.Points {
+		sum += p.Value
+	}
+	return sum
+}
+
+func (m *Metric) Avg() float64 {
+	return m.Sum() / float64(len(m.Points))
+}
+
+func (m *Metric) Max() float64 {
+	var values []float64
+	for _, p := range m.Points {
+		values = append(values, p.Value)
+	}
+	sort.Float64s(values)
+	return values[len(values)-1]
+}
+
 func main() {
 	now := time.Now()
 	gprcLatencyMetric := &Metric{
@@ -37,6 +62,10 @@ func main() {
 		Points: []*Point{
 			&Point{Value: 0.8, Timestamp: now},
 			&Point{Value: 1.2, Timestamp: now},
+			&Point{Value: 0.2, Timestamp: now},
 		},
 	}
+	fmt.Println(gprcLatencyMetric.Sum())
+	fmt.Println(gprcLatencyMetric.Avg())
+	fmt.Println(gprcLatencyMetric.Max())
 }
