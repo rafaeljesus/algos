@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"sort"
+	"math"
 	"time"
 )
 
@@ -30,6 +30,7 @@ type Metric struct {
 	Points []*Point
 }
 
+// O(n) time | O(1) space
 func (m *Metric) Sum() float64 {
 	var sum float64
 	for _, p := range m.Points {
@@ -38,17 +39,31 @@ func (m *Metric) Sum() float64 {
 	return sum
 }
 
+// O(n) time | O(1) space
 func (m *Metric) Avg() float64 {
 	return m.Sum() / float64(len(m.Points))
 }
 
+// O(n) time | space O(1)
 func (m *Metric) Max() float64 {
-	var values []float64
+	var max float64
 	for _, p := range m.Points {
-		values = append(values, p.Value)
+		if max < p.Value {
+			max = math.Max(max, p.Value)
+		}
 	}
-	sort.Float64s(values)
-	return values[len(values)-1]
+	return max
+}
+
+// O(n) time | space O(1)
+func (m *Metric) Min() float64 {
+	min := math.Inf(1)
+	for _, p := range m.Points {
+		if min > p.Value {
+			min = math.Min(min, p.Value)
+		}
+	}
+	return min
 }
 
 func main() {
@@ -65,7 +80,15 @@ func main() {
 			&Point{Value: 0.2, Timestamp: now},
 		},
 	}
-	fmt.Println(gprcLatencyMetric.Sum())
-	fmt.Println(gprcLatencyMetric.Avg())
-	fmt.Println(gprcLatencyMetric.Max())
+	fmt.Printf("sum: %f\n", gprcLatencyMetric.Sum())
+	fmt.Printf("avg: %f\n", gprcLatencyMetric.Avg())
+	fmt.Printf("max: %f\n", gprcLatencyMetric.Max())
+	fmt.Printf("min: %f\n", gprcLatencyMetric.Min())
 }
+
+/*
+sum: 2.200000
+avg: 0.733333
+max: 1.200000
+min: 0.200000
+*/
