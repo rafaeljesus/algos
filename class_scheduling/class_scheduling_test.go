@@ -6,20 +6,16 @@ import (
 )
 
 func FindSchedule(schedule [][]float64) [][]float64 {
-	count := 0
-	next := 1
 	res := make([][]float64, 0)
 	for i, _ := range res {
 		res[i] = make([]float64, 0)
 	}
-	res = append(res, schedule[count])
-	for next < len(schedule) {
-		if schedule[count][1] <= schedule[next][0] {
+	start := 0
+	res = append(res, schedule[start])
+	for next := 1; next < len(schedule); next++ {
+		if schedule[start][1] <= schedule[next][0] {
 			res = append(res, schedule[next])
-			count = next
-			next++
-		} else {
-			next++
+			start = next
 		}
 	}
 	return res
