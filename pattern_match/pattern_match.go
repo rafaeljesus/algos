@@ -5,15 +5,16 @@ import "fmt"
 // text: abaababbaba
 // pattern: abba
 func FindMatch(text, pattern string) bool {
-	var count int
-	j := 0
-	for i := 0; i < len(text); i++ {
+	var i, j int
+	for i < len(text) {
+		//fmt.Printf("text[%d]=%s pattern[%d]=%s\n", i, string(text[i]), j, string(pattern[j]))
 		if text[i] != pattern[j] {
 			j = 0
 			continue
 		}
-		count++
-		if count == len(pattern) {
+		j++
+		i++
+		if j == len(pattern) {
 			return true
 		}
 	}
@@ -28,6 +29,11 @@ func main() {
 
 	text = "abada"
 	pattern = "abade"
+	found = FindMatch(text, pattern)
+	fmt.Println(found)
+
+	text = "abada"
+	pattern = "abada"
 	found = FindMatch(text, pattern)
 	fmt.Println(found)
 
