@@ -1,12 +1,12 @@
 package pattern_match
 
 // Time: O(nm) | Space: O(1)
-func FindMatch(text, pattern string) bool {
+func StringMatch(text, pattern string) bool {
 	n := len(text)
 	m := len(pattern)
-	for i := 0; i <= n-m+1; i++ {
+	for i := 0; i <= n-m; i++ {
 		j := 0
-		for j < m && (text[i+j] == pattern[j]) {
+		for j < m && (text[i+j] == pattern[j] || pattern[j] == '*') {
 			j++
 		}
 		if j == m {
@@ -17,7 +17,7 @@ func FindMatch(text, pattern string) bool {
 }
 
 // Time: O(nm) | Space: O(n)
-func FindMatchAndReturnIdx(text, pattern string) (bool, []int) {
+func StringMatchReturnIdx(text, pattern string) (bool, []int) {
 	idx := []int{}
 	var i, j int
 	for i < len(text) {
