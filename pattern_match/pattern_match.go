@@ -1,23 +1,22 @@
 package pattern_match
 
-// Time: O(n) | Space: O(1)
+// Time: O(nm) | Space: O(1)
 func FindMatch(text, pattern string) bool {
-	var i, j int
-	for i < len(text) {
-		if text[i] != pattern[j] {
-			j = 0
-			continue
+	n := len(text)
+	m := len(pattern)
+	for i := 0; i <= n-m+1; i++ {
+		j := 0
+		for j < m && text[i+j] == pattern[j] {
+			j++
 		}
-		j++
-		if j == len(pattern) {
+		if j == m {
 			return true
 		}
-		i++
 	}
 	return false
 }
 
-// Time: O(n) | Space: O(n)
+// Time: O(nm) | Space: O(n)
 func FindMatchAndReturnIdx(text, pattern string) (bool, []int) {
 	idx := []int{}
 	var i, j int
