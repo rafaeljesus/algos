@@ -15,7 +15,7 @@ func TestPatternMatch(t *testing.T) {
 		{"abada", "abada", true, []int{0, 1, 2, 3, 4}},
 		{"abadaabade", "abade", true, []int{5, 6, 7, 8, 9}},
 		{"abada", "abade", false, []int{}},
-		//{"abada", "ab*", true, []int{}},
+		{"abada", "ab*", true, []int{}},
 	}
 	for _, tt := range tests {
 		found := FindMatch(tt.text, tt.pattern)

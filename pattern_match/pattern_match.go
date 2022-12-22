@@ -6,7 +6,7 @@ func FindMatch(text, pattern string) bool {
 	m := len(pattern)
 	for i := 0; i <= n-m+1; i++ {
 		j := 0
-		for j < m && text[i+j] == pattern[j] {
+		for j < m && (text[i+j] == pattern[j]) {
 			j++
 		}
 		if j == m {
